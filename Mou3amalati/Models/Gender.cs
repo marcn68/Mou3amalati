@@ -8,8 +8,7 @@ namespace Mou3amalati.Models
 {
     public class Gender
     {
-        [Key]
-        public int id { get; set; }
-        public string gender { get; set; }
+        public int Id { get; set; }
+        public string Description { get; set; }
     }
 }

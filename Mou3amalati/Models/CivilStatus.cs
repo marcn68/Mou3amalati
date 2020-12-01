@@ -8,8 +8,7 @@ namespace Mou3amalati.Models
 {
     public class CivilStatus
     {
-        [Key]
-        public int id { get; set; }
-        public string description { get; set; }
+        public int Id { get; set; }
+        public string Description { get; set; }
     }
 }

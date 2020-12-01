@@ -9,23 +9,14 @@ namespace Mou3amalati.Models
 {
     public class DocumentRequest
     {
-        [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
+        public Citizen User { get; set; }
+        public Citizen AssignedToUser { get; set; }
 
-        [ForeignKey("Citizen")]
-        public int citizenId { get; set; }
-        public Citizen user { get; set; }
+        public Document Document { get; set; }
 
-        [ForeignKey("Citizen")]
-        public int assignedToId { get; set; }
-        public Citizen assignedToUser { get; set; }
+        public DateTime RequestDate { get; set; }
 
-        [ForeignKey("Documents")]
-        public int documentId { get; set; }
-        public virtual Documents docs { get; set; }
-
-        public DateTime requestDate { get; set; }
-
-        public ICollection<DocumentRequestStatus> documentsRequestStatuses{ get; set; }
+        public ICollection<DocumentRequestStatus> DocumentsRequestStatuses{ get; set; }
 }
 }

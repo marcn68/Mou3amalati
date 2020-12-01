@@ -8,8 +8,7 @@ namespace Mou3amalati.Models
 {
     public class BloodType
     {
-        [Key]
-        public int id { get; set; }
-        public string type { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
     }
 }

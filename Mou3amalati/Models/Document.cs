@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Mou3amalati.Models
 {
-    public class Religion
+    public class Document
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; }
+        public string Details { get; set; }
+        public string Price { get; set; }
     }
 }

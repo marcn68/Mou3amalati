@@ -16,13 +16,16 @@ namespace Mou3amalati.Data
 
         public DbSet<Citizen> Citizens { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<Documents> Document { get; set; }
-        public DbSet<Religion> Religion { get; set; }
-        public DbSet<CivilStatus> CivilStatus { get; set; }
-        public DbSet<Gender> Gender { get; set; }
-        public DbSet<Address> Address { get; set; }
-        public DbSet<BloodType> BloodType { get; set; }
-        public DbSet<DocumentRequestStatus> DocumentRequestStatus { get; set; }
-        public DbSet<DocumentRequest> DocumentRequest { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<Religion> Religions { get; set; }
+        public DbSet<CivilStatus> CivilStatuses { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<BloodType> BloodTypes { get; set; }
+        public DbSet<DocumentRequestStatus> DocumentRequestStatuses { get; set; }
+        public DbSet<DocumentRequest> DocumentRequests { get; set; }
+        public DbSet<Family> Families { get; set; }
+        public DbSet<FamilyMember> FamilyMembers { get; set; }
+        public DbSet<FamilyRole> FamilyRoles { get; set; }
     }
 }

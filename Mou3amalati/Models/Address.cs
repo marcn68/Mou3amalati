@@ -9,14 +9,14 @@ namespace Mou3amalati.Models
     public class Address
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         //Mouhafza
-        public string state { get; set; }
+        public string State { get; set; }
         //Kada2
-        public string district { get; set; }
-        public string city { get; set; }
-        public string streetName { get; set; }
-        public string buildingName { get; set; }
-        public string details { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string StreetName { get; set; }
+        public string BuildingName { get; set; }
+        public string Details { get; set; }
     }
 }

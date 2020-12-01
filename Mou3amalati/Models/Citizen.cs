@@ -10,58 +10,35 @@ namespace Mou3amalati.Models
 {
     public class Citizen : IdentityUser
     {
-        [Key]
-        public string Id { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        [ForeignKey("Citizen")]
-        public int fatherId { get; set; }
-        //public virtual Citizen father { get; set; }
+        public int FamilyId { get; set; }
+        public virtual Family Family { get; set; }
 
-        [ForeignKey("Citizen")]
-        public int motherId { get; set; }
-        //public virtual Citizen mother { get; set; }
+        public virtual FamilyRole FamilyRole { get; set; }
 
-        public DateTime birthDate { get; set; }
-        public string birthPlace { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string BirthPlace { get; set; }
 
-        [ForeignKey("Religion")]
-        public int religionId { get; set; }
-        public virtual Religion religion { get; set; }
+        public Religion Religion { get; set; }
+        public CivilStatus CivilStatus { get; set; }
 
-        [ForeignKey("CivilStatus")]
-        public int civilStatusId { get; set; }
-        public virtual CivilStatus civilStatus { get; set; }
-
-        [ForeignKey("BloodType")]
-        public int bloodTypeId { get; set; }
-        public virtual BloodType bloodType { get; set; }
-
-        [ForeignKey("Address")]
-        public int originAddressId { get; set; }
-        public virtual Address originAddress { get; set; }
-
-        [ForeignKey("Address")]
-        public int? residenceAddressId { get; set; }
-        public virtual Address residenceAddress { get; set; }
+        public BloodType BloodType { get; set; }
+        public Address OriginAddress { get; set; }
+        public Address ResidenceAddress { get; set; }
 
         //Ra2em el Sejel
-        public int civilRegisterNumber { get; set; }
+        public int CivilRegisterNumber { get; set; }
+        public Gender Gender { get; set; }
 
-        [ForeignKey("Gender")]
-        public int genderId { get; set; }
-        public virtual Gender gender { get; set; }
-
-        [ForeignKey("IdentityRole")]
-        public string roleId { get; set; }
-        public virtual IdentityRole role { get; set; }
+        public IdentityRole Role { get; set; }
 
         [NotMapped]
-        public ICollection<DocumentRequest> docsRequested { get; set; }
+        public ICollection<DocumentRequest> DocsRequested { get; set; }
         [NotMapped]
-        public ICollection<DocumentRequest> docsAssigned { get; set; }
+        public ICollection<DocumentRequest> DocsAssigned { get; set; }
         [NotMapped]
-        public ICollection<DocumentRequest> docsAssignedStatus { get; set; }
+        public ICollection<DocumentRequest> DocsAssignedStatus { get; set; }
     }
 }
