@@ -1,8 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    //ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/landing.css" />
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 title">
+            <div class="text-lg-center">
+                <h1 class="display-4">
+                    Mou3amalati
+                </h1>   
+            </div>
+            <h4>
+                Your home for all official documents
+            </h4>
+        </div>
+        
+        <div class="col-lg-6 buttons">
+            <div class="container" id="rectangleBack">
+                <div>
+                    <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Request Account</a>
+                </div>
+                <br />
+                <div>
+                    <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </div>
+            </div>            
+        </div>
+    </div>
 </div>

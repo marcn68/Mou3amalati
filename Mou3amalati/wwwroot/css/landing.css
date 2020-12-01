@@ -1,0 +1,47 @@
+﻿html {
+    font-size: 14px;
+    font-family: Cambria;
+
+    margin:auto;
+}
+
+body {
+    background-image: url('../images/landing_page.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+html, body{
+    height: 100%;
+}
+
+.title{
+    margin-top: 250;
+    font-size: 50px;
+    font-family: Cambria;
+    font-weight: bolder;
+}
+
+.buttons {
+    margin-top: 200;
+    font-size: 40px;
+    font-family: Cambria;
+}
+
+a{
+    width: 200px;
+    height: 40px;
+}
+
+.row{
+    text-align: center;
+}
+
+/*#rectangleBack {
+    border: 5px solid red;
+    height: 300px;
+    width: 300px;
+}*/
