@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Mou3amalati.Models
 {
-    public class Citizen : IdentityUser
+    public class Citizen
     {
+        public string Id { get; set; }
+        public IdentityUser IdentityUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int FamilyId { get; set; }
+        public int? FamilyId { get; set; }
         public virtual Family Family { get; set; }
 
         public virtual FamilyRole FamilyRole { get; set; }
