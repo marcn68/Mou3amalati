@@ -19,7 +19,7 @@ html, body{
 }
 
 .title{
-    margin-top: 250;
+    margin-top: 175;
     font-size: 50px;
     font-family: Cambria;
     font-weight: bolder;
@@ -40,8 +40,8 @@ a{
     text-align: center;
 }
 
-/*#rectangleBack {
-    border: 5px solid red;
-    height: 300px;
-    width: 300px;
-}*/
+.btn-primary {
+    color: #0b181b;
+    background-color: #90BAAD;
+    border-color: #90BAAD;
+}
