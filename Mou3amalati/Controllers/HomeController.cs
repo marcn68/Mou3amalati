@@ -10,6 +10,7 @@ using Mou3amalati.Models;
 using Mou3amalati.BLL;
 using Mou3amalati.Data;
 using Microsoft.AspNetCore.Identity;
+using Mou3amalati.ViewModel;
 
 namespace Mou3amalati.Controllers
 {
@@ -18,6 +19,7 @@ namespace Mou3amalati.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
         public UserManager<IdentityUser> _userManager;
+        HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
@@ -26,11 +28,6 @@ namespace Mou3amalati.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult RequestAccount()
         {
             return View();
         }
@@ -46,13 +43,24 @@ namespace Mou3amalati.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult RequestAccount()
+        {
+            return View(homeRequestAccountViewModel);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> SubmitAccountAsync(IFormCollection RequestAccount)
+        public async Task<IActionResult> RequestAccount(IFormCollection RequestAccount)
         {
             HomeManager home = new HomeManager();
             string id = RequestAccount["identity"];
             string email = RequestAccount["email"];
             string password = home.CreateRandomPassword(10);
+            string error = null;
+
+            homeRequestAccountViewModel.id = id;
+            homeRequestAccountViewModel.email = email;
+            homeRequestAccountViewModel.error = error;
+            
 
             var citizen = await _context.Citizens.FindAsync(id);
             //var citizen = _context.Citizens.Find(id);
@@ -61,22 +69,34 @@ namespace Mou3amalati.Controllers
             {
                 if (citizen.IdentityUser.Id != null)
                 {
-                    var user = new IdentityUser { UserName = citizen.IdentityUser.Email, Email = citizen.IdentityUser.Email };
-                    var result = await _userManager.CreateAsync(user, citizen.IdentityUser.PasswordHash);
+                    var user = new IdentityUser { UserName = id, Email = email };
+                    var result = await _userManager.CreateAsync(user, password);
                     user.EmailConfirmed = true;
                     citizen.IdentityUser = null;
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created a new account with password.");
                         citizen.IdentityUser = user;
-                        _context.Users.Add(user);
+                        _context.Citizens.Update(citizen);
                         await _context.SaveChangesAsync();
                     }
                     home.EmailSender(id, email, password);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //Error Message
+                    error = "This account is already requested.";
+                    homeRequestAccountViewModel.error = error;
                 }
             }
-
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                //Erro Message
+                error = "No citizen with this Id was found.";
+                homeRequestAccountViewModel.error = error;
+            }
+            return View(homeRequestAccountViewModel);
         }
     }
 }

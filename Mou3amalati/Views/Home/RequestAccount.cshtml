@@ -3,6 +3,8 @@
     Layout = null;
 }
 
+@model Mou3amalati.ViewModel.HomeRequestAccountViewModel
+
 @*<div class="text-center">
         <h1 class="display-4">Welcome</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
@@ -60,15 +62,15 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <form asp-controller="Home" asp-action="SubmitAccount">
+                <form asp-controller="Home" asp-action="RequestAccount" method="post">
                     <div class="form-group">
                         <label for="IdentityNo" class="control-label">Identity Number</label>
-                        <input name="identity" for="IdentityNo" type="text" class="form-control" />
-                        <span for="IdentityNo" class="text-danger"></span>
+                        <input name="identity" for="IdentityNo" type="text" class="form-control" value="@Model.id" />
+                        <span for="IdentityNo" class="text-danger">@Model.error</span>
                     </div>
                     <div class="form-group">
                         <label for="Email" class="control-label">Email</label>
-                        <input name="email" for="Email" type="email" class="form-control" />
+                        <input name="email" for="Email" type="email" class="form-control" value="@Model.email" />
                         <span for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group" align="center">
