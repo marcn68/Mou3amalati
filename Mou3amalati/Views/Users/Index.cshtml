@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/users.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+</head>
+
+<h1 align="center">HomePage</h1>
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3">
+            <div class="container">
+                <a class="btn btn-primary" asp-controller="Users" asp-action="DocumentsList">
+                    <div style="display: inline-block; text-align: center">
+                        <i class="fa fa-file-text fa-5x" aria-hidden="true"></i>
+                        <p style="font-weight: bold">Request Documents</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="container">
+                <a class="btn btn-primary" asp-controller="Users" asp-action="MyDocuments">
+                    <div style="display: inline-block; text-align: center">
+                        <i class="fa fa-list-alt fa-5x" aria-hidden="true"></i>
+                        <p style="font-weight: bold">My Documents</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
