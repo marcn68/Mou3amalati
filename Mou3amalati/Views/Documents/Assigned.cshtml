@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Assigned";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/documents.css" />
+</head>
+
+<div class="container" align="center">
+    <h1>Choose a person to assign this document to</h1>
+    <br />
+    <p>This document will be assigned to a Mokhtar from your District</p>
+    <p>Choose one of them:</p>
+</div>
+
+<div class="container" align="center">
+    <div>
+        <form asp-action="">
+            <div class="form-group">
+                <label for="assigned" class="control-label">Assign it to:</label>
+                <input for="assigned" class="form-control" type="" />
+            </div>
+        </form>
+    </div>
+</div>

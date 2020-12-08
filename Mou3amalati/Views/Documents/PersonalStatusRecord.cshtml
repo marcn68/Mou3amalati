@@ -1,0 +1,110 @@
+﻿@model Mou3amalati.Models.Citizen
+
+@{
+    ViewData["Title"] = "PersonalStatusRecord";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/documents.css" />
+</head>
+
+<div class="container" align="center">
+    <h1>Personal Status Record</h1>
+    <br />
+</div>
+
+<div class="container">
+    <div>
+        <h3>
+            Information
+        </h3>
+        <p>
+            This document contains all your personal information and is needed everywhere.
+        </p>
+        <p>
+            Price: 10000L.L.
+        </p>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    <input type="button" class="btn btn-primary" value="Request Document" onclick="showDiv()"></input>
+</div>
+
+<br />
+
+<div class="container" id="formDiv" style="display:none">
+    <h4>Citizen</h4>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4">
+            <form asp-action="Assigned">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FamilyId" class="control-label"></label>
+                    <select asp-for="FamilyId" class="form-control" asp-items="ViewBag.FamilyId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthPlace" class="control-label"></label>
+                    <input asp-for="BirthPlace" class="form-control" />
+                    <span asp-validation-for="BirthPlace" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CivilRegisterNumber" class="control-label"></label>
+                    <input asp-for="CivilRegisterNumber" class="form-control" />
+                    <span asp-validation-for="CivilRegisterNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Religion" class="control-label"></label>
+                    <input asp-for="Religion" class="form-control" />
+                    <span asp-validation-for="Religion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CivilStatus" class="control-label"></label>
+                    <input asp-for="CivilStatus" class="form-control" />
+                    <span asp-validation-for="CivilStatus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OriginAddress" class="control-label"></label>
+                    <input asp-for="OriginAddress" class="form-control" />
+                    <span asp-validation-for="OriginAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Request" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDiv() {
+        document.getElementById('formDiv').style.display = "block";
+    }
+</script>
