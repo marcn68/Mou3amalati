@@ -1,4 +1,5 @@
-﻿
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@model SelectList
 @{
     ViewData["Title"] = "Assigned";
 }
@@ -16,11 +17,16 @@
 
 <div class="container" align="center">
     <div>
-        <form asp-action="">
+        <form asp-action="" asp-controller="">
             <div class="form-group">
                 <label for="assigned" class="control-label">Assign it to:</label>
-                <input for="assigned" class="form-control" type="" />
+                <select for="assigned" asp-items="Model">
+                    <option value="0">--Select Mokhtar--</option>
+                </select>
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+    </form>
+</div>
 </div>

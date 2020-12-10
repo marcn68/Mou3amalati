@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Mou3amalati.Data;
 using Mou3amalati.Models;
 
@@ -21,17 +22,23 @@ namespace Mou3amalati.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult PersonalStatusRecord(Citizen c)
+        public IActionResult PersonalStatusRecord()
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
 
-            c = _context.Citizens.Find(userName); 
+            Citizen c = _context.Citizens.Find(userName); 
 
             return View(c);
         }
 
         public IActionResult Assigned()
         {
+            SelectList list = new SelectList(_context.Citizens.Where(a => a.OriginAddress.City == "a" && a.Role.Id == "1")
+                .Select(a => new
+                {
+                    FirstName = a.FirstName,
+                    LastName = a.LastName
+                }), "CitizenFName", "CitizenLName");
             return View();
         }
     }
