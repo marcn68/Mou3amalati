@@ -33,12 +33,21 @@ namespace Mou3amalati.Controllers
 
         public IActionResult Assigned()
         {
-            SelectList list = new SelectList(_context.Citizens.Where(a => a.OriginAddress.City == "a" && a.Role.Id == "1")
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+
+            Citizen c = _context.Citizens.Find(userName);
+
+            SelectList list = new SelectList(_context.Citizens.Where(a => a.OriginAddress.City == c.OriginAddress.City && a.Role.Id == "1")
                 .Select(a => new
                 {
                     FirstName = a.FirstName,
                     LastName = a.LastName
                 }), "CitizenFName", "CitizenLName");
+            return View();
+        }
+
+        public IActionResult RequestFinished()
+        {
             return View();
         }
     }
