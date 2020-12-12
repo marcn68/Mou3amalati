@@ -14,7 +14,13 @@ namespace Mou3amalati.Models
         public IdentityUser IdentityUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public string FullName
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
         public int? FamilyId { get; set; }
         public virtual Family Family { get; set; }
 
@@ -43,4 +49,6 @@ namespace Mou3amalati.Models
         [NotMapped]
         public ICollection<DocumentRequest> DocsAssignedStatus { get; set; }
     }
+
+    
 }
