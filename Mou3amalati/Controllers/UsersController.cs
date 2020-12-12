@@ -18,7 +18,7 @@ namespace Mou3amalati.Controllers
             return View();
         }
 
-        public IActionResult MyDocuments()
+        public IActionResult UserDocumentList()
         {
             return View();
         }
