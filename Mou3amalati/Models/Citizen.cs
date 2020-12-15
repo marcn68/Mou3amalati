@@ -41,5 +41,10 @@ namespace Mou3amalati.Models
         public virtual ICollection<DocumentRequest> DocsRequested { get; set; } = new Collection<DocumentRequest>();
         public virtual ICollection<DocumentRequest> DocsAssigned { get; set; } = new Collection<DocumentRequest>();
         public virtual ICollection<DocumentRequestStatus> DocsAssignedStatus { get; set; } = new Collection<DocumentRequestStatus>();
+    
+        public string FullName(string fname, string lname)
+        {
+            return this.FirstName + " " + this.LastName;
+        }
     }
 }

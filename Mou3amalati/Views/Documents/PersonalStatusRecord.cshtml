@@ -57,8 +57,19 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FamilyId" class="control-label"></label>
-                    <select asp-for="FamilyId" class="form-control" asp-items="ViewBag.FamilyId"></select>
+                    <label asp-for="FatherFirstName" class="control-label"></label>
+                    <input asp-for="FatherFirstName" class="form-control" />
+                    <span asp-validation-for="FatherFirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MotherFirstName" class="control-label"></label>
+                    <input asp-for="MotherFirstName" class="form-control" />
+                    <span asp-validation-for="MotherFirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MotherMaidenName" class="control-label"></label>
+                    <input asp-for="MotherMaidenName" class="form-control" />
+                    <span asp-validation-for="MotherMaidenName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="BirthDate" class="control-label"></label>

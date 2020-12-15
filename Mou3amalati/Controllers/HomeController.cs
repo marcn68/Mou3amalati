@@ -67,16 +67,16 @@ namespace Mou3amalati.Controllers
 
             if(citizen != null)
             {
-                if (citizen.IdentityUser.Id != null)
+                if (citizen.ApplicationIdentityUser.Id != null)
                 {
-                    var user = new IdentityUser { UserName = id, Email = email };
+                    var user = new ApplicationIdentityUser { UserName = id, Email = email };
                     var result = await _userManager.CreateAsync(user, password);
                     user.EmailConfirmed = true;
-                    citizen.IdentityUser = null;
+                    citizen.ApplicationIdentityUser = null;
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created a new account with password.");
-                        citizen.IdentityUser = user;
+                        citizen.ApplicationIdentityUser = user;
                         _context.Citizens.Update(citizen);
                         await _context.SaveChangesAsync();
                     }

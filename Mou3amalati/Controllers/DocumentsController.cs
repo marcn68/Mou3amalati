@@ -31,13 +31,19 @@ namespace Mou3amalati.Controllers
             return View(c);
         }
 
-        public IActionResult Assigned()
+        public async Task<IActionResult> Assigned()
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
 
             Citizen c = _context.Citizens.Find(userName);
 
-            SelectList list = new SelectList(_context.Citizens.Where(a => a.OriginAddress.City == c.OriginAddress.City && a.Role.Id == "1")
+            var usersOfRole = await _userManager.GetUsersInRoleAsync("Mokhtar");
+
+            //var mokhtar_role = _context.UserRoles.Where(a => a.RoleId == "1");
+
+            SelectList list = new SelectList(
+                _context.Citizens.Where(
+                citizen => citizen.OriginAddress.City == c.OriginAddress.City && citizen == usersOfRole)
                 .Select(a => new
                 {
                     FirstName = a.FirstName,
