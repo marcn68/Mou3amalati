@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Request Account";
+    Layout = null;
+}
+
+@model Mou3amalati.ViewModel.HomeRequestAccountViewModel
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mou3amalati</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mou3amalati</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @*<partial name="_LoginPartial" />*@
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6" style="text-align: center">
+                <h1>
+                    Request your account here
+                </h1>
+                <br />
+                <h6>
+                    Enter your identity number. You can find it on your official ID Card.
+                </h6>
+                <h6>
+                    And enter your email so we can send you your credentials.
+                </h6>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <form asp-controller="Home" asp-action="RequestAccount" method="post">
+                    <div class="form-group">
+                        <label for="IdentityNo" class="control-label">Identity Number</label>
+                        <input name="identity" for="IdentityNo" type="text" class="form-control" value="@Model.id" />
+                        <span for="IdentityNo" class="text-danger">@Model.error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="control-label">Email</label>
+                        <input name="email" for="Email" type="email" class="form-control" value="@Model.email" />
+                        <span for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" align="center">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+                
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Mou3amalati - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
