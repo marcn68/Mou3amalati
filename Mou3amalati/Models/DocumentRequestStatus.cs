@@ -10,11 +10,13 @@ namespace Mou3amalati.Models
     public class DocumentRequestStatus
     {
         public int Id { get; set; }
+        public DateTimeOffset StatusDate { get; set; }
+        public int DocumentRequestId { get; set; }
+        public virtual DocumentRequest DocumentRequest { get; set; }
+        public int StatusId { get; set; }
+        public virtual DocumentStatus Status { get; set; }
+        public string CitizenId { get; set; }
+        public virtual Citizen AssignedToCitizen { get; set; }
 
-        public DocumentRequest DocumentRequest { get; set; }
-        public Status Status { get; set; }
-        public Citizen AssignedToUser { get; set; }
-
-        public DateTime StatusDate { get; set; }
     }
 }
