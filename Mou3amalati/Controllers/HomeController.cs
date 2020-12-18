@@ -72,7 +72,6 @@ namespace Mou3amalati.Controllers
                     var user = new ApplicationIdentityUser { UserName = id, Email = email };
                     var result = await _userManager.CreateAsync(user, password);
                     user.EmailConfirmed = true;
-                    citizen.ApplicationIdentityUser = null;
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created a new account with password.");

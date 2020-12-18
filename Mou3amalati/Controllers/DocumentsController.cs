@@ -39,16 +39,19 @@ namespace Mou3amalati.Controllers
 
             var usersOfRole = await _userManager.GetUsersInRoleAsync("Mokhtar");
 
-            //var mokhtar_role = _context.UserRoles.Where(a => a.RoleId == "1");
-
-            SelectList list = new SelectList(
+            foreach(var u in usersOfRole)
+            {
+                string username = u.UserName;
+                SelectList mokhtarList = new SelectList(
                 _context.Citizens.Where(
-                citizen => citizen.OriginAddress.City == c.OriginAddress.City && citizen == usersOfRole)
+                citizen => citizen.OriginAddress.City == c.OriginAddress.City && citizen.ApplicationIdentityUser.UserName == username )
                 .Select(a => new
                 {
                     FirstName = a.FirstName,
                     LastName = a.LastName
                 }), "CitizenFName", "CitizenLName");
+            }
+
             return View();
         }
 
