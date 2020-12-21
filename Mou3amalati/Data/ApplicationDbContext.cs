@@ -7,7 +7,7 @@ using Mou3amalati.Models;
 
 namespace Mou3amalati.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationIdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationIdentityUser,ApplicationIdentityRole,string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -63,7 +63,7 @@ namespace Mou3amalati.Data
                 .WithOne(a => a.Citizen)
                 .HasForeignKey<Citizen>(c => c.ApplicationIdentityUserId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
+                .IsRequired(false);
         }
 
 

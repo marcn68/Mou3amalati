@@ -1,0 +1,160 @@
+﻿@model Mou3amalati.ViewModels.CitizensCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Citizen</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.Id" class="control-label"></label>
+                <input asp-for="@Model.Citizen.Id" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.FirstName" class="control-label">First Name</label>
+                <input asp-for="@Model.Citizen.FirstName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.LastName" class="control-label">Last Name</label>
+                <input asp-for="@Model.Citizen.LastName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.FatherFirstName" class="control-label">Father First Name</label>
+                <input asp-for="@Model.Citizen.FatherFirstName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.FatherFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.MotherFirstName" class="control-label">Mother First Name</label>
+                <input asp-for="@Model.Citizen.MotherFirstName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.MotherFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.MotherMaidenName" class="control-label">Mother Maiden Name</label>
+                <input asp-for="@Model.Citizen.MotherMaidenName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.MotherMaidenName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.BirthDate" class="control-label">Date Of Birth</label>
+                <input asp-for="@Model.Citizen.BirthDate" type="date" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.BirthPlace" class="control-label">Place Of Birth</label>
+                <input asp-for="@Model.Citizen.BirthPlace" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.BirthPlace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ReligionId" class="control-label">Religion</label>
+                <select asp-for="@Model.Citizen.ReligionId" class="form-control" asp-items="@Model.Religions"></select>
+                <span asp-validation-for="@Model.Citizen.ReligionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.CivilStatusId" class="control-label">Civil Status</label>
+                <select asp-for="@Model.Citizen.CivilStatusId" class="form-control" asp-items="@Model.CivilStatuses"></select>
+                <span asp-validation-for="@Model.Citizen.CivilStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.BloodTypeId" class="control-label">Blood Type</label>
+                <select asp-for="@Model.Citizen.BloodTypeId" class="form-control" asp-items="@Model.BloodTypes"></select>
+                <span asp-validation-for="@Model.Citizen.BloodTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.GenderId" class="control-label">Gender</label>
+                <select asp-for="@Model.Citizen.GenderId" class="form-control" asp-items="@Model.Genders"></select>
+                <span asp-validation-for="@Model.Citizen.GenderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.LifeStatusId" class="control-label">Life Status</label>
+                <select asp-for="@Model.Citizen.LifeStatusId" class="form-control" asp-items="@Model.LifeStatuses"></select>
+                <span asp-validation-for="@Model.Citizen.LifeStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.CivilRegisterNumber" class="control-label">Civil Register Number</label>
+                <input asp-for="@Model.Citizen.CivilRegisterNumber" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.CivilRegisterNumber" class="text-danger"></span>
+            </div>
+            <h4>Residence Address</h4>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.District" class="control-label"></label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.District" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.State" class="control-label"></label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.State" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.City" class="control-label"></label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.City" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.StreetName" class="control-label">Street</label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.StreetName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.BuildingName" class="control-label">Building</label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.BuildingName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.BuildingName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.ResidenceAddress.Details" class="control-label"></label>
+                <input asp-for="@Model.Citizen.ResidenceAddress.Details" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.ResidenceAddress.Details" class="text-danger"></span>
+            </div>
+            <h4>Origins Address</h4>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.District" class="control-label"></label>
+                <input asp-for="@Model.Citizen.OriginAddress.District" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.State" class="control-label"></label>
+                <input asp-for="@Model.Citizen.OriginAddress.State" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.City" class="control-label"></label>
+                <input asp-for="@Model.Citizen.OriginAddress.City" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.StreetName" class="control-label">Street</label>
+                <input asp-for="@Model.Citizen.OriginAddress.StreetName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.BuildingName" class="control-label">Building</label>
+                <input asp-for="@Model.Citizen.OriginAddress.BuildingName" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.BuildingName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Citizen.OriginAddress.Details" class="control-label"></label>
+                <input asp-for="@Model.Citizen.OriginAddress.Details" class="form-control" />
+                <span asp-validation-for="@Model.Citizen.OriginAddress.Details" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
