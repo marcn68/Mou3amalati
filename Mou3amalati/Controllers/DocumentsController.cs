@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mou3amalati.Data;
 using Mou3amalati.Models;
-using Mou3amalati.ViewModel;
+using Mou3amalati.ViewModels;
 
 namespace Mou3amalati.Controllers
 {
     public class DocumentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationIdentityUser> _userManager;
         private string assignedToValue;
 
-        public DocumentsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public DocumentsController(ApplicationDbContext context, UserManager<ApplicationIdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -26,11 +26,14 @@ namespace Mou3amalati.Controllers
 
         public IActionResult PersonalStatusRecord()
         {
-            var userName = User.FindFirstValue(ClaimTypes.Name);
+            CitizensCreateViewModel citizenVM = new CitizensCreateViewModel();
+            SQLCitizenRepository citizenRepo = new SQLCitizenRepository(_context);
 
-            Citizen c = _context.Citizens.Find(userName); 
+            var citizenId = User.FindFirstValue(ClaimTypes.Name);
 
-            return View(c);
+            citizenVM.Citizen = citizenRepo.GetCitizen(citizenId);
+
+            return View(citizenVM);
         }
 
         public async Task<IActionResult> Assigned()
