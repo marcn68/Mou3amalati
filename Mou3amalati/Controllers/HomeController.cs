@@ -18,13 +18,14 @@ namespace Mou3amalati.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        public UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationIdentityUser> _userManager;
         HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<ApplicationIdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -67,16 +68,15 @@ namespace Mou3amalati.Controllers
 
             if(citizen != null)
             {
-                if (citizen.IdentityUser.Id != null)
+                if (citizen.ApplicationIdentityUserId == null)
                 {
-                    var user = new IdentityUser { UserName = id, Email = email };
+                    var user = new ApplicationIdentityUser { UserName = id, Email = email, CitizenId =id};
                     var result = await _userManager.CreateAsync(user, password);
                     user.EmailConfirmed = true;
-                    citizen.IdentityUser = null;
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created a new account with password.");
-                        citizen.IdentityUser = user;
+                        citizen.ApplicationIdentityUser = user;
                         _context.Citizens.Update(citizen);
                         await _context.SaveChangesAsync();
                     }
