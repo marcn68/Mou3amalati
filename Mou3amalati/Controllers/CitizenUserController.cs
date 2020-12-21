@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mou3amalati.Controllers
 {
-    public class UsersController : Controller
+    public class CitizenUserController : Controller
     {
         public IActionResult Index()
         {
