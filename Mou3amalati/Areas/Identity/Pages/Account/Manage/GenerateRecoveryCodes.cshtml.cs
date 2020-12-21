@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Mou3amalati.Models;
 
 namespace Mou3amalati.Areas.Identity.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationIdentityUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationIdentityUser> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;
