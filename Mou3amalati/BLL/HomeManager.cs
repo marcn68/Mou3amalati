@@ -23,7 +23,7 @@ namespace Mou3amalati.BLL
             BodyBuilder bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = "<h1>Welcome to Mou3amalati</h1>" +
                 "<p> You will find here your credentials for Mou3amalati</p>" +
-                "<p> Username: " + id + "</p><br/>" +
+                "<p> Username: " + id + "</p>" +
                 "<p> Password: " + password + "</p><br/>";
             bodyBuilder.TextBody = "Welcome to Mou3amalati";
 
