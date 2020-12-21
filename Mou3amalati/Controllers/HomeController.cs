@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +7,7 @@ using Mou3amalati.Models;
 using Mou3amalati.BLL;
 using Mou3amalati.Data;
 using Microsoft.AspNetCore.Identity;
-using Mou3amalati.ViewModel;
+using Mou3amalati.ViewModels;
 
 namespace Mou3amalati.Controllers
 {
@@ -19,7 +16,6 @@ namespace Mou3amalati.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationIdentityUser> _userManager;
-        HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<ApplicationIdentityUser> userManager)
         {
@@ -46,12 +42,14 @@ namespace Mou3amalati.Controllers
 
         public IActionResult RequestAccount()
         {
+            HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
             return View(homeRequestAccountViewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> RequestAccount(IFormCollection RequestAccount)
         {
+            HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
             HomeManager home = new HomeManager();
             string id = RequestAccount["identity"];
             string email = RequestAccount["email"];
@@ -64,9 +62,8 @@ namespace Mou3amalati.Controllers
             
 
             var citizen = await _context.Citizens.FindAsync(id);
-            //var citizen = _context.Citizens.Find(id);
 
-            if(citizen != null)
+            if (citizen != null)
             {
                 if (citizen.ApplicationIdentityUserId == null)
                 {
@@ -76,6 +73,7 @@ namespace Mou3amalati.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created a new account with password.");
+                        await _userManager.AddToRoleAsync(user, "Citizen");
                         citizen.ApplicationIdentityUser = user;
                         _context.Citizens.Update(citizen);
                         await _context.SaveChangesAsync();
