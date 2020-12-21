@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Mou3amalati.Models;
 
 namespace Mou3amalati.Areas.Identity.Pages.Account.Manage
 {
