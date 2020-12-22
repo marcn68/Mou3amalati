@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,13 +11,13 @@ using Mou3amalati.ViewModels;
 
 namespace Mou3amalati.Controllers
 {
-    public class DocumentsController : Controller
+    public class DocumentRequestController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationIdentityUser> _userManager;
         private string assignedToValue;
 
-        public DocumentsController(ApplicationDbContext context, UserManager<ApplicationIdentityUser> userManager)
+        public DocumentRequestController(ApplicationDbContext context, UserManager<ApplicationIdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -76,9 +75,9 @@ namespace Mou3amalati.Controllers
 
             DateTime nowDate = DateTime.Now;
 
-            Document doc = (Document)_context.Documents.Where(d => d.Name == "Personal Status Record");
+            Document doc = _context.Documents.Where(d => d.Name == "Personal Status Record").First();
 
-            ApplicationIdentityRole role = (ApplicationIdentityRole) _context.Roles.Where(d => d.Name == "Mokhtar");
+            ApplicationIdentityRole role = _context.Roles.Where(d => d.Name == "Mokhtar").First();
 
             WorkFlow wf = _context.WorkFlows.Where(w => w.DocumentId == doc.Id && w.RoleId == role.Id).First();
 
@@ -105,9 +104,8 @@ namespace Mou3amalati.Controllers
             };
 
             _context.DocumentRequestStatuses.Add(docRequestStatus);
-
             _context.SaveChanges();
-            
+
             return View();
         }
     }
