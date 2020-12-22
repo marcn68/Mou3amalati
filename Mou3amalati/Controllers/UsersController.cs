@@ -11,7 +11,7 @@ using Mou3amalati.ViewModels;
 
 namespace Mou3amalati.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
