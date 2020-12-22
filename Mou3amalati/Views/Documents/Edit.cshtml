@@ -1,0 +1,64 @@
+﻿@model Mou3amalati.ViewModels.DocumentsEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Document</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Document.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Document.Name" class="control-label"></label>
+                <input asp-for="@Model.Document.Name" class="form-control" />
+                <span asp-validation-for="@Model.Document.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Document.Details" class="control-label"></label>
+                <input asp-for="@Model.Document.Details" class="form-control" />
+                <span asp-validation-for="@Model.Document.Details" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Document.Price" class="control-label"></label>
+                <input asp-for="@Model.Document.Price" class="form-control" />
+                <span asp-validation-for="@Model.Document.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Document.Steps" class="control-label"></label>
+                <input asp-for="@Model.Document.Steps" class="form-control" />
+                <span asp-validation-for="@Model.Document.Steps" class="text-danger"></span>
+            </div>
+            <h4>Workflow</h4>
+            @{for (var i = 0; i < Model.Document.Steps; i++)
+                {
+                    var selected = Model.Roles.Where(x => x.Value == Model.Document.WorkFlows[i].RoleId).First();
+                    selected.Selected = true;
+                    <input type="hidden" asp-for="@Model.Document.WorkFlows[i].Id" />
+                    <input type="hidden" asp-for="@Model.Document.WorkFlows[i].OrdinalPosition" />
+                    <input type="hidden" asp-for="@Model.Document.WorkFlows[i].DocumentId" />
+                    <div class="form-group">
+                        <label asp-for="@(Model.Document.WorkFlows[i].RoleId)" class="control-label">Step @(Model.Document.WorkFlows[i].OrdinalPosition)</label>
+                        <select asp-for="@(Model.Document.WorkFlows[i].RoleId)" class="form-control" asp-items="@(Model.Roles)"></select>
+                        <span asp-validation-for="@(Model.Document.WorkFlows[i].RoleId)" class="text-danger"></span>
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
