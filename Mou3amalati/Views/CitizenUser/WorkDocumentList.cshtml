@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Mou3amalati.Models.DocumentRequest>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+
+}
+
+<h1>Work Document List</h1>
+
+<p>
+    <a asp-action="Index">Go To Home Page</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Citizen Id
+            </th>
+            <th>
+                Document Name
+            </th>
+            <th>
+                Get Citizen Info
+            </th>
+            <th>
+                Attachment Link
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestedByCitizenId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Document.Name)
+            </td>
+            <td>
+                <a asp-controller="Citizens" asp-action="Details" target="_blank" asp-route-id="@item.RequestedByCitizenId">Citizen</a>
+            </td>
+            <td>
+                <a asp-action="AddLink" asp-route-id="">Add Attachement</a>
+            </td>
+            <td>
+                <a asp-action="SendtoNext" asp-route-id="">Choose</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
