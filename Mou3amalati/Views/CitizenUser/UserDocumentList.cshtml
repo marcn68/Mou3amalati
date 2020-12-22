@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Mou3amalati.Models.DocumentRequestStatus>
+
+@{
+    ViewData["Title"] = "UserDocumentList";
+}
+
+<h1>UserDocumentList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Document Name
+            </th>
+            <th>
+                Requestor
+            </th>
+            <th>
+                Assigned To
+            </th>
+            <th>
+                Document Status
+            </th>
+            <th>
+                Status Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentRequest.Document.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentRequest.RequestedByCitizen.FullName)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.AssignedToCitizen.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

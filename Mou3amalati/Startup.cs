@@ -12,6 +12,7 @@ using Mou3amalati.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Mou3amalati.Models;
 
 namespace Mou3amalati
 {
@@ -30,9 +31,13 @@ namespace Mou3amalati
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationIdentityUser,ApplicationIdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
+            services.AddScoped<ICitizenRepository, SQLCitizenRepository>();
+            services.AddScoped<IRoleRepository, SQLRoleRepository>();
+            services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddScoped<IDocumentRepository, SQLDocumentRepository>();
             services.AddRazorPages();
         }
 
