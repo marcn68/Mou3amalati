@@ -41,6 +41,13 @@ namespace Mou3amalati.Models
             return roleManager.FindByNameAsync(Name);
         }
 
+        public async Task<string> getRoleIdByName(string Name)
+        {
+            var role = await getRoleByName(Name);
+            var roleId = role.Id;
+            return roleId;
+        }
+
         public async Task<ApplicationIdentityRole> updateRole(ApplicationIdentityRole roleChanges)
         {
             var role = await roleManager.FindByIdAsync(roleChanges.Id);
