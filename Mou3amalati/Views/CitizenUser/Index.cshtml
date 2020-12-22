@@ -15,7 +15,7 @@
 <br />
 <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-3"></div>
+        <div class="col-lg-2"></div>
         <div class="col-lg-3">
             <div class="container">
                 <a class="btn btn-primary" asp-controller="CitizenUser" asp-action="DocumentsList">
@@ -36,6 +36,20 @@
                 </a>
             </div>
         </div>
+        @if (User.IsInRole("Mokhtar"))
+        {
+            <div class="col-lg-3">
+                <div class="container">
+                    <a class="btn btn-primary" asp-controller="CitizenUser" asp-action="WorkDocumentList">
+                        <div style="display: inline-block; text-align: center">
+                            <i class="fa fa-briefcase fa-5x" aria-hidden="true"></i>
+                            <p style="font-weight: bold">Work</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+
         <div class="col-lg-3"></div>
     </div>
 </div>

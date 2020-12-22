@@ -110,7 +110,7 @@ namespace Mou3amalati.Controllers
 
             int docRequestId = _context.DocumentRequests.Where(d => d == docRequest).Select(c => c.Id).FirstOrDefault();
 
-            DocumentStatus docStatus = _context.DocumentStatuses.Find(1);
+            DocumentStatus docStatus = _context.DocumentStatuses.Find(2);
             DocumentRequestStatus docRequestStatus = new DocumentRequestStatus()
             {
                 StatusDate = nowDate,

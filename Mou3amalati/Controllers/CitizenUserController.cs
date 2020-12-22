@@ -32,14 +32,11 @@ namespace Mou3amalati.Controllers
 
             DocumentRequest docsRequested = new DocumentRequest();
 
-            //List<DocumentRequest> citizenUserDocuments = _context.DocumentRequests
-            //    .Include(c => c.DocumentsRequestStatuses)
-            //    .Where(d => d.RequestedByCitizenId == userName)
-            //    .ToList();
-
             List<DocumentRequestStatus> citizenUserDocuments = _context.DocumentRequestStatuses
                 .Include(c => c.DocumentRequest)
                 .Include(c => c.DocumentRequest.Document)
+                //.Include(c => c.DocumentRequest.Document.WorkFlows)
+                .Include(c => c.DocumentRequest.Document.WorkFlows).ThenInclude(i => i.Role)
                 .Include(c => c.DocumentRequest.RequestedByCitizen)
                 .Include(c => c.AssignedToCitizen)
                 .Include(c => c.Status)
