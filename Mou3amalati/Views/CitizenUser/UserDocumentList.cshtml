@@ -37,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.DocumentRequest.Document.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DocumentRequest.RequestedByCitizen.FullName(item.DocumentRequest.RequestedByCitizen.FirstName, item.DocumentRequest.RequestedByCitizen.LastName))
+                @Html.DisplayFor(modelItem => item.DocumentRequest.RequestedByCitizen.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssignedToCitizen.FullName(item.AssignedToCitizen.FirstName, item.AssignedToCitizen.LastName))
+               @Html.DisplayFor(modelItem => item.AssignedToCitizen.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status.Description)
