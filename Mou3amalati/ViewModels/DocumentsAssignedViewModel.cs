@@ -9,5 +9,7 @@ namespace Mou3amalati.ViewModels
     public class DocumentsAssignedViewModel
     {
         public SelectList roleList { get; set; }
+        public string SelectedRoleCitizen { get; set; }
+        public string SelectedText { get; set; }
     }
 }

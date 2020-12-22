@@ -39,85 +39,85 @@
     <hr />
     <div class="row">
         <div class="col-lg-4">
-            <form asp-action="Assigned">
+            <form asp-action="Assigned" method="get">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.Id" class="control-label"></label>
-                    <input asp-for="@Model.Citizen.Id" class="form-control" />
+                    <input asp-for="@Model.Citizen.Id" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.Id" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.FirstName" class="control-label">First Name</label>
-                    <input asp-for="@Model.Citizen.FirstName" class="form-control" />
+                    <input asp-for="@Model.Citizen.FirstName" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.LastName" class="control-label">Last Name</label>
-                    <input asp-for="@Model.Citizen.LastName" class="form-control" />
+                    <input asp-for="@Model.Citizen.LastName" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.FatherFirstName" class="control-label">Father First Name</label>
-                    <input asp-for="@Model.Citizen.FatherFirstName" class="form-control" />
+                    <input asp-for="@Model.Citizen.FatherFirstName" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.FatherFirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.MotherFirstName" class="control-label">Mother First Name</label>
-                    <input asp-for="@Model.Citizen.MotherFirstName" class="form-control" />
+                    <input asp-for="@Model.Citizen.MotherFirstName" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.MotherFirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.MotherMaidenName" class="control-label">Mother Maiden Name</label>
-                    <input asp-for="@Model.Citizen.MotherMaidenName" class="form-control" />
+                    <input asp-for="@Model.Citizen.MotherMaidenName" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.MotherMaidenName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.BirthDate" class="control-label">Date Of Birth</label>
-                    <input asp-for="@Model.Citizen.BirthDate" type="date" class="form-control" />
+                    <input asp-for="@Model.Citizen.BirthDate" type="date" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.BirthDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.BirthPlace" class="control-label">Place Of Birth</label>
-                    <input asp-for="@Model.Citizen.BirthPlace" class="form-control" />
+                    <input asp-for="@Model.Citizen.BirthPlace" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.BirthPlace" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.Religion.Description" class="control-label">Religion</label>
-                    <input asp-for="@Model.Citizen.Religion.Description" class="form-control" />
+                    <input asp-for="@Model.Citizen.Religion.Description" class="form-control" readonly/>
                     @*<select asp-for="@Model.Citizen.ReligionId" class="form-control" asp-items="@Model.Religions"></select>*@
                     <span asp-validation-for="@Model.Citizen.Religion.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.CivilStatus.Description" class="control-label">Civil Status</label>
-                    <input asp-for="@Model.Citizen.CivilStatus.Description" class="form-control" />
+                    <input asp-for="@Model.Citizen.CivilStatus.Description" class="form-control" readonly/>
                     @*<select asp-for="@Model.Citizen.CivilStatusId" class="form-control" asp-items="@Model.CivilStatuses"></select>*@
                     <span asp-validation-for="@Model.Citizen.CivilStatus.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.Gender.Description" class="control-label">Gender</label>
-                    <input asp-for="@Model.Citizen.Gender.Description" class="form-control" />
+                    <input asp-for="@Model.Citizen.Gender.Description" class="form-control" readonly/>
                     @*<select asp-for="@Model.Citizen.GenderId" class="form-control" asp-items="@Model.Genders"></select>*@
                     <span asp-validation-for="@Model.Citizen.Gender.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.CivilRegisterNumber" class="control-label">Civil Register Number</label>
-                    <input asp-for="@Model.Citizen.CivilRegisterNumber" class="form-control" />
+                    <input asp-for="@Model.Citizen.CivilRegisterNumber" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.CivilRegisterNumber" class="text-danger"></span>
                 </div>
                 <h4>Origins Address</h4>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.OriginAddress.State" class="control-label"></label>
-                    <input asp-for="@Model.Citizen.OriginAddress.State" class="form-control" />
+                    <input asp-for="@Model.Citizen.OriginAddress.State" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.OriginAddress.State" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.OriginAddress.District" class="control-label"></label>
-                    <input asp-for="@Model.Citizen.OriginAddress.District" class="form-control" />
+                    <input asp-for="@Model.Citizen.OriginAddress.District" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.OriginAddress.District" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.OriginAddress.City" class="control-label"></label>
-                    <input asp-for="@Model.Citizen.OriginAddress.City" class="form-control" />
+                    <input asp-for="@Model.Citizen.OriginAddress.City" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.OriginAddress.City" class="text-danger"></span>
                 </div>
                 <div class="form-group">
