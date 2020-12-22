@@ -36,7 +36,8 @@ namespace Mou3amalati
             services.AddControllersWithViews();
             services.AddScoped<ICitizenRepository, SQLCitizenRepository>();
             services.AddScoped<IRoleRepository, SQLRoleRepository>();
-            //services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddScoped<IDocumentRepository, SQLDocumentRepository>();
             services.AddRazorPages();
         }
 

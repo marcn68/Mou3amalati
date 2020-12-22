@@ -85,6 +85,9 @@
             <th>
                 Origin Address Details
             </th>
+            <th>
+                User
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -163,6 +166,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OriginAddress.Details)
             </td>
+            @{ if (item.ApplicationIdentityUserId != null)
+                {
+                    <td>
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@item.ApplicationIdentityUserId">User</a>
+                    </td>
+                }
+                else
+                {
+
+                    <td>
+                        Not Linked
+                    </td>
+                }
+            }
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -13,5 +13,6 @@ namespace Mou3amalati.Models
         Task<ApplicationIdentityRole> deleteRole(ApplicationIdentityRole role);
         Task<ApplicationIdentityRole> addRole(ApplicationIdentityRole role);
         Task<ApplicationIdentityRole> updateRole(ApplicationIdentityRole roleChanges);
+        Task<string> getRoleIdByName(string Name);
     }
 }
