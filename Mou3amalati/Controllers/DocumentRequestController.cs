@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Mou3amalati.Data;
 using Mou3amalati.Models;
 using Mou3amalati.ViewModels;
@@ -40,33 +41,33 @@ namespace Mou3amalati.Controllers
             DocumentsAssignedViewModel docVM = new DocumentsAssignedViewModel();
 
             var userName = User.FindFirstValue(ClaimTypes.Name);
-            Citizen c = _context.Citizens.Find(userName);
+            Citizen c = _context.Citizens.Include(citizen => citizen.OriginAddress).FirstOrDefault(c => c.Id == userName);
 
             var usersOfRole = await _userManager.GetUsersInRoleAsync("Mokhtar");
 
             foreach(var u in usersOfRole)
             {
                 string username = u.UserName;
+                var rList = _context.Citizens.Include(citizen => citizen.OriginAddress)
+                    .Include(citizen => citizen.ApplicationIdentityUser)
+                    .Where(citizen => citizen.OriginAddress.City == c.OriginAddress.City && citizen.ApplicationIdentityUser.UserName == username)
+                    .ToList();
+
                 docVM.roleList = new SelectList(
-                _context.Citizens.Where(
-                citizen => citizen.OriginAddress.City == c.OriginAddress.City && citizen.ApplicationIdentityUser.UserName == username )
-                .Select(a => new
-                {
-                    FirstName = a.FirstName,
-                    LastName = a.LastName
-                }), "CitizenFName", "CitizenLName");
+                    rList, "Id", "FullName"
+                    );
             }
 
             return View(docVM);
         }
 
-        [HttpPost]
-        public IActionResult Assigned(DocumentsAssignedViewModel docVM)
-        {
-            assignedToValue = Request.Form["roleList"].ToString();
+        //[HttpPost]
+        //public IActionResult Assigned(DocumentsAssignedViewModel docVM)
+        //{
+        //    assignedToValue = Request.Form["roleList"].ToString();
 
-            return View(docVM);
-        }
+        //    return View(docVM);
+        //}
 
         public IActionResult RequestFinished()
         {
@@ -77,14 +78,25 @@ namespace Mou3amalati.Controllers
 
             Document doc = _context.Documents.Where(d => d.Name == "Personal Status Record").First();
 
-            ApplicationIdentityRole role = _context.Roles.Where(d => d.Name == "Mokhtar").First();
+            var wf = _context.WorkFlows.Where(w => w.DocumentId == doc.Id).ToList();
+            WorkFlow workflow = new WorkFlow();
 
-            WorkFlow wf = _context.WorkFlows.Where(w => w.DocumentId == doc.Id && w.RoleId == role.Id).First();
+            foreach (var w in wf)
+            {
+                if (w.OrdinalPosition == 1)
+                {
+                    ApplicationIdentityRole role = _context.Roles.Find(w.RoleId);
+                    workflow = w;
+                    break;
+                }
+            }
+
+            //WorkFlow wf = _context.WorkFlows.Where(w => w.DocumentId == doc.Id && w.RoleId == role.Id).First();
 
             DocumentRequest docRequest = new DocumentRequest()
             {
                 RequestDate = nowDate,
-                CurrentOrdinalPositionInWorkflow = wf.OrdinalPosition,
+                CurrentOrdinalPositionInWorkflow = workflow.OrdinalPosition,
                 RequestedByCitizenId = c.Id,
                 CurrentAssignedToCitizenId = assignedToValue,
                 DocumentId = doc.Id
