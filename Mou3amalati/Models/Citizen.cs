@@ -14,6 +14,11 @@ namespace Mou3amalati.Models
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get { return (FirstName + " " + LastName); }
+        }
         public string FatherFirstName { get; set; }
         public string MotherFirstName { get; set; }
         public string MotherMaidenName { get; set; }
@@ -42,9 +47,9 @@ namespace Mou3amalati.Models
         public virtual ICollection<DocumentRequest> DocsAssigned { get; set; } = new Collection<DocumentRequest>();
         public virtual ICollection<DocumentRequestStatus> DocsAssignedStatus { get; set; } = new Collection<DocumentRequestStatus>();
     
-        public string FullName(string fname, string lname)
-        {
-            return this.FirstName + " " + this.LastName;
-        }
+        //public string FullName()
+        //{
+        //    return this.FirstName + " " + this.LastName;
+        //}
     }
 }
