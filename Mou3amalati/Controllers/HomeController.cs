@@ -8,9 +8,11 @@ using Mou3amalati.BLL;
 using Mou3amalati.Data;
 using Microsoft.AspNetCore.Identity;
 using Mou3amalati.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mou3amalati.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -24,11 +26,13 @@ namespace Mou3amalati.Controllers
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
@@ -40,12 +44,14 @@ namespace Mou3amalati.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [AllowAnonymous]
         public IActionResult RequestAccount()
         {
             HomeRequestAccountViewModel homeRequestAccountViewModel = new HomeRequestAccountViewModel();
             return View(homeRequestAccountViewModel);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RequestAccount(IFormCollection RequestAccount)
         {
