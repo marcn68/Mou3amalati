@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
@@ -46,7 +46,7 @@
                 <a asp-action="AddLink" asp-route-id="">Add Attachement</a>
             </td>
             <td>
-                <a asp-action="SendtoNext" asp-route-id="">Choose</a>
+                <a asp-action="SendtoNext" asp-route-id="@item.Id">Choose</a>
             </td>
         </tr>
         }
