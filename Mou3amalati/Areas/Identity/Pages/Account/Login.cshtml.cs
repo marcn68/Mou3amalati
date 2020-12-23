@@ -88,7 +88,15 @@ namespace Mou3amalati.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     //return LocalRedirect(returnUrl);
-                    return Redirect("~/CitizenUser/Index");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return Redirect("~/Citizens");
+                    }
+                    else
+                    {
+                        return Redirect("~/CitizenUser/Index");
+                    }
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {
