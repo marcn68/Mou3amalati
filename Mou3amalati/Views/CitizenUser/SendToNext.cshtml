@@ -18,8 +18,10 @@
 <div class="container" align="center">
     <div>
         <form asp-action="SendToNext">
+            <input type="hidden" asp-for="@Model.DocRequestId" />
+            <input type="hidden" asp-for="@Model.isLast" />
             <div class="form-group">
-                <label asp-for="@Model.SelectedRoleCitizenId" class="control-label">Religion</label>
+                <label asp-for="@Model.SelectedRoleCitizenId" class="control-label">@Model.RoleName</label>
                 <select asp-for="@Model.SelectedRoleCitizenId" class="form-control" asp-items="@Model.roleList"></select>
                 <span asp-validation-for="@Model.SelectedRoleCitizenId" class="text-danger"></span>
             </div>

@@ -30,7 +30,8 @@ namespace Mou3amalati.Controllers
 
         public IActionResult DocumentsList()
         {
-            return View();
+            List<Document> docs = _context.Documents.ToList();
+            return View(docs);
         }
 
         public IActionResult UserDocumentList()
@@ -39,19 +40,25 @@ namespace Mou3amalati.Controllers
 
             DocumentRequest docsRequested = new DocumentRequest();
 
-            //List<DocumentRequest> citizenUserDocuments = _context.DocumentRequests
-            //    .Include(c => c.DocumentsRequestStatuses)
-            //    .Where(d => d.RequestedByCitizenId == userName)
-            //    .ToList();
+            var ids = _context.DocumentRequestStatuses.Include(c => c.DocumentRequest).Where(c => c.DocumentRequest.RequestedByCitizenId == userName).Select(c => c.DocumentRequestId).Distinct();
 
-            List<DocumentRequestStatus> citizenUserDocuments = _context.DocumentRequestStatuses
+            List<DocumentRequestStatus> citizenUserDocuments = new List<DocumentRequestStatus>();
+
+            foreach (var id in ids)
+            {
+                DocumentRequestStatus citizenUserDocument = _context.DocumentRequestStatuses
                 .Include(c => c.DocumentRequest)
                 .Include(c => c.DocumentRequest.Document)
+                .Include(c => c.DocumentRequest.Document.WorkFlows).ThenInclude(i => i.Role)
                 .Include(c => c.DocumentRequest.RequestedByCitizen)
                 .Include(c => c.AssignedToCitizen)
                 .Include(c => c.Status)
-                .Where(d => d.DocumentRequest.RequestedByCitizenId == userName)
-                .ToList();
+                .Where(d => d.DocumentRequest.RequestedByCitizenId == userName && d.DocumentRequestId == id).OrderByDescending(c => c.StatusDate).First();
+
+                citizenUserDocuments.Add(citizenUserDocument);
+            }
+
+            citizenUserDocuments = citizenUserDocuments.OrderByDescending(c => c.StatusDate).ToList();
 
             return View(citizenUserDocuments);
         }
@@ -61,12 +68,6 @@ namespace Mou3amalati.Controllers
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
 
-
-            //List<DocumentRequest> citizenUserDocuments = _context.DocumentRequests
-            //    .Include(c => c.DocumentsRequestStatuses)
-            //    .Where(d => d.RequestedByCitizenId == userName)
-            //    .ToList();
-
             var workDocuments = _context.DocumentRequests
                 .Include(c => c.Document)
                 .Where(d => d.CurrentAssignedToCitizenId == userName)
@@ -75,7 +76,7 @@ namespace Mou3amalati.Controllers
             return View(workDocuments);
         }
 
-        public async Task<IActionResult> SendtoNext(int DocRequestId)
+        public async Task<IActionResult> SendtoNext(int Id)
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
             Citizen c = _context.Citizens.Include(citizen => citizen.OriginAddress).FirstOrDefault(c => c.Id == userName);
@@ -87,13 +88,25 @@ namespace Mou3amalati.Controllers
             // update currordinalposition
             // remove doc request from curr role citizen
             var docAssignedViewModel = new DocumentsAssignedViewModel();
-            var docRequest = _context.DocumentRequests.Find(DocRequestId);
+            docAssignedViewModel.DocRequestId = Id;
+            var docRequest = _context.DocumentRequests
+                .Include(c => c.Document).ThenInclude(c => c.WorkFlows).ThenInclude(c =>c.Role).Include(c => c.RequestedByCitizen).FirstOrDefault(c => c.Id == Id);
             var nextOrdinalPosition = docRequest.CurrentOrdinalPositionInWorkflow + 1;
             var nextRoleIndex = docRequest.CurrentOrdinalPositionInWorkflow;
             var roleName = docRequest.Document.WorkFlows[nextRoleIndex].Role.Name;
             docAssignedViewModel.RoleName = roleName;
             if(roleName == "Citizen"){
                 docAssignedViewModel.isLast = true;
+                var listofCitizen = new List<Citizen>();
+
+                var requestor = docRequest.RequestedByCitizen;
+                listofCitizen.Add(requestor);
+
+                docAssignedViewModel.roleList = new SelectList(
+                    listofCitizen, "Id", "FullName"
+                );
+
+                return View(docAssignedViewModel);
             }
             var usersOfRole = await _userManager.GetUsersInRoleAsync(roleName);
             foreach (var u in usersOfRole)
@@ -144,7 +157,7 @@ namespace Mou3amalati.Controllers
             _context.SaveChanges();
             
 
-            return View(docAssignedViewModel);
+            return RedirectToAction("Index");
         }
 
     }

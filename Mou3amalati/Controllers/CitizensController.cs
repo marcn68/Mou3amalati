@@ -30,7 +30,9 @@ namespace Mou3amalati.Controllers
             List<Citizen> citizens = _citizenRepository.GetAllCitizens().ToList();
             return View(citizens);
         }
-
+        
+        [AllowAnonymous]
+        [Authorize(Roles = "Mokhtar")]
         // GET: Citizens/Details/5
         public IActionResult Details(string id)
         {
