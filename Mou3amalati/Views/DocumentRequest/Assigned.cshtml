@@ -11,31 +11,30 @@
 <div class="container" align="center">
     <h1>Choose a person to assign this document to</h1>
     <br />
-    <p>This document will be assigned to a Mokhtar from your District</p>
+    <p>This document will be assigned to a @(Model.RoleName) from your District</p>
     <p>Choose one of them:</p>
 </div>
 
 <div class="container" align="center">
     <div>
         <form asp-action="RequestFinished" asp-controller="DocumentRequest" method="post">
+            <input type="hidden" asp-for="@Model.DocumentId" />
             <div class="form-group">
-                <label for="assigned" class="control-label">Assign it to:</label>
-                @Html.DropDownListFor(m => m.SelectedRoleCitizen, Model.roleList, "Select a Mokhtar")
-                @Html.HiddenFor(m => m.SelectedText)
-                @*<select for="assigned" asp-items="Model.roleList" name="roleList">
-                </select>*@
+                <label asp-for="@Model.SelectedRoleCitizenId" class="control-label">@Model.RoleName</label>
+                <select asp-for="@Model.SelectedRoleCitizenId" class="form-control" asp-items="@Model.roleList"></select>
+                <span asp-validation-for="@Model.SelectedRoleCitizenId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
-    </form>
+        </form>
 </div>
 </div>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 $(function(){
 $("#SelectedRoleCitizen").on("change", function {
    $("#SelectedText").val($(this).text());
  });
 });
-</script>
+</script>*@

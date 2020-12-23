@@ -24,8 +24,9 @@ namespace Mou3amalati.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult PersonalStatusRecord()
+        public IActionResult PersonalStatusRecord(int Id)
         {
+            ViewBag.Id = Id;
             CitizensCreateViewModel citizenVM = new CitizensCreateViewModel();
             SQLCitizenRepository citizenRepo = new SQLCitizenRepository(_context);
 
@@ -36,17 +37,22 @@ namespace Mou3amalati.Controllers
             return View(citizenVM);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Assigned()
+        public async Task<IActionResult> Assigned(int Id)
         {
-            DocumentsAssignedViewModel docVM = new DocumentsAssignedViewModel();
+            var doc = _context.Documents
+                .Include(c => c.WorkFlows).ThenInclude(c => c.Role).Where(c => c.Id == Id).First();
 
+            DocumentsAssignedViewModel docVM = new DocumentsAssignedViewModel();
+            docVM.DocumentId = Id;
             var userName = User.FindFirstValue(ClaimTypes.Name);
             Citizen c = _context.Citizens.Include(citizen => citizen.OriginAddress).FirstOrDefault(c => c.Id == userName);
 
-            var usersOfRole = await _userManager.GetUsersInRoleAsync("Mokhtar");
+            var usersOfRole = await _userManager.GetUsersInRoleAsync(doc.WorkFlows[0].Role.Name);
 
-            foreach(var u in usersOfRole)
+            var roleName = doc.WorkFlows[0].Role.Name;
+            docVM.RoleName = roleName;
+
+            foreach (var u in usersOfRole)
             {
                 string username = u.UserName;
                 var rList = _context.Citizens.Include(citizen => citizen.OriginAddress)
@@ -61,16 +67,9 @@ namespace Mou3amalati.Controllers
             return View(docVM);
         }
 
-        //[HttpPost]
-        //public IActionResult Assigned(DocumentsAssignedViewModel docVM, IFormCollection form)
-        //{
-        //    assignedToValue = docVM.SelectedRoleCitizen;
-        //    return View(docVM);
-        //}
-
         public IActionResult RequestFinished(DocumentsAssignedViewModel docVM)
         {
-            string assignedToUser = docVM.SelectedRoleCitizen;
+            string assignedToUser = docVM.SelectedRoleCitizenId;
             var userName = User.FindFirstValue(ClaimTypes.Name);
             Citizen citizenUser = _context.Citizens.Find(userName);
 
@@ -78,7 +77,7 @@ namespace Mou3amalati.Controllers
 
             DateTime nowDate = DateTime.Now;
 
-            Document doc = _context.Documents.Where(d => d.Name == "Personal Status Record").First();
+            Document doc = _context.Documents.Where(d => d.Id == docVM.DocumentId).First();
 
             var wf = _context.WorkFlows.Where(w => w.DocumentId == doc.Id).ToList();
             WorkFlow workflow = new WorkFlow();

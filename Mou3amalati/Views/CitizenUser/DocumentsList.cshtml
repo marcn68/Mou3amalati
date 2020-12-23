@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Mou3amalati.Models.Document>  
 @{
     ViewData["Title"] = "DocumentsList";
 }
@@ -18,9 +18,11 @@
 <br />
 
 <div class="container">
-    <a asp-controller="DocumentRequest" asp-action="PersonalStatusRecord">Personal Status Record (Ekhraj Ked)</a>
-    <hr />
-    <a asp-controller="Documents" asp-action="">Identity Card</a>
-    <hr />
-    <a asp-controller="Documents" asp-action="">Passeport</a>
+    @{
+        foreach (var item in Model)
+        {
+            <a asp-controller="DocumentRequest" asp-action="PersonalStatusRecord" asp-route-id="@item.Id">@item.Name</a>
+            <hr />
+        }
+    }
 </div>

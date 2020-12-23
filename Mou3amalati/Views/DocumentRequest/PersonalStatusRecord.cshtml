@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "PersonalStatusRecord";
+    var Id = ViewBag.Id;
 }
 
 <head>
@@ -39,7 +40,7 @@
     <hr />
     <div class="row">
         <div class="col-lg-4">
-            <form asp-action="Assigned" method="get">
+            <form>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="@Model.Citizen.Id" class="control-label"></label>
@@ -120,9 +121,10 @@
                     <input asp-for="@Model.Citizen.OriginAddress.City" class="form-control" readonly/>
                     <span asp-validation-for="@Model.Citizen.OriginAddress.City" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <input type="submit" value="Request" class="btn btn-primary" />
-                </div>
+                </div>*@
+                <a asp-action="Assigned" asp-route-id="@Id" class="btn btn-primary">Request</a>
             </form>
         </div>
     </div>
